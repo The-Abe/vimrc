@@ -57,6 +57,7 @@ set smarttab "Make backspace remove one indent worth of spaces.
 set relativenumber "Relative numbers
 set number "Make the current line number visible
 set ttyfast "Inform vim that we have a fast terminal and it can just redraw
+set lazyredraw "Don't redraw the screen for every single thing I do.
 set linebreak "Only wrap on sensible breaking points
 set shiftround "When shifting indents with <,>, round to nearest valid indent.
 set textwidth=80 "80 characters for wrapping
