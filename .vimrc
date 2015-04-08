@@ -23,6 +23,7 @@ Plugin 'vimwiki' "Wiki inside vim that I use for Pathfinder and DND
 Plugin 'tomasr/molokai' "Colorscheme
 Plugin 'spiiph/vim-space' "Make <space> repeat motions like n/N and ;
 Plugin 'tpope/vim-commentary' "Easy comment mappings
+Plugin 'AndrewRadev/splitjoin.vim' "Map gS and gJ to join and split statements.
 
 "Vundle required
 call vundle#end()
