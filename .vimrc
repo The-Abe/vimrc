@@ -65,6 +65,8 @@ set textwidth=80 "80 characters for wrapping
 set formatoptions=qrn1j "Better format options see :h fo-table
 colorscheme molokai
 set t_Co=256 "COLOUR ALL THE THINGS!
+set modeline "Enable modelines
+set modelines=5 "Check 5 lines for modelines
 
 "Turn on the wiLd menu
 set wildmenu
