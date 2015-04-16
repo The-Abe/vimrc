@@ -202,3 +202,7 @@ highlight ColorColumn ctermbg=235 guibg=#2c2d27
 
 "Check ruby with ruby -wc
 autocmd Filetype ruby nnoremap <silent> <f5> :SyntasticCheck<cr>:Errors<cr>
+
+"commentary mapping
+nnoremap <silent> <leader>c :Commentary<cr>
+vnoremap <silent> <leader>c :Commentary<cr>
