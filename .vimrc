@@ -24,6 +24,7 @@ Plugin 'tomasr/molokai' "Colorscheme
 Plugin 'spiiph/vim-space' "Make <space> repeat motions like n/N and ;
 Plugin 'tpope/vim-commentary' "Easy comment mappings
 Plugin 'AndrewRadev/splitjoin.vim' "Map gS and gJ to join and split statements.
+Plugin 'mileszs/ack.vim' "Search code with ack, because ack is awesome.
 
 "Vundle required
 call vundle#end()
