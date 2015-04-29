@@ -138,6 +138,20 @@ vnoremap L $
 "Mash the enter key to indent the current line and go to the next
 nnoremap <cr> ==j
 
+"Speaking of indents
+nnoremap <c-h> <<
+nnoremap <c-l> >>
+inoremap <c-h> <c-o><<
+inoremap <c-l> <c-o>>>
+vnoremap <c-h> < gv
+vnoremap <c-l> > gv
+
+"Move lines
+nnoremap <c-k> :move-2<cr>
+nnoremap <c-j> :move+<cr>
+vnoremap <c-k> :move-2<cr>gv
+vnoremap <c-j> :move'>+<cr>gv
+
 "Turn 2+2 into 2+2=4
 nnoremap <leader>bc :.!bc -l<cr>
 
@@ -187,7 +201,6 @@ cnoremap w!! w !sudo tee % >/dev/null
 "Completion mappings because I'm too lazy to type <c-x>
 inoremap <c-f> <c-x><c-f>
 inoremap <c-]> <c-x><c-]>
-inoremap <c-l> <c-x><c-l>
 inoremap <c-n> <c-x><c-n>
 
 "Home and end just like bash
@@ -203,6 +216,17 @@ highlight ColorColumn ctermbg=235 guibg=#2c2d27
 "Check ruby with ruby -wc
 autocmd Filetype ruby nnoremap <silent> <f5> :SyntasticCheck<cr>:Errors<cr>
 
+" Markdown headings
+nnoremap <leader>1 mPyypVr=`P
+nnoremap <leader>2 mPyypVr-`P
+nnoremap <leader>3 mPI### <esc>`P3l
+nnoremap <leader>4 mPI#### <esc>`P5l
+nnoremap <leader>5 mPI##### <esc>`Pi6l
+
 "commentary mapping
 nnoremap <silent> <leader>c :Commentary<cr>
 vnoremap <silent> <leader>c :Commentary<cr>
+
+"Close temp screens with q
+au FileType help nnoremap q :q!<cr>
+au FileType qf nnoremap q :q!<cr>
