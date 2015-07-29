@@ -26,6 +26,11 @@ Plugin 'tpope/vim-commentary' "Easy comment mappings
 Plugin 'AndrewRadev/splitjoin.vim' "Map gS and gJ to join and split statements.
 Plugin 'mileszs/ack.vim' "Search code with ack, because ack is awesome.
 Plugin 'rstacruz/sparkup' "Edit html using sparkup syntax
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'vim-pandoc/vim-pandoc'
+Plugin 'vim-pandoc/vim-pandoc-syntax'
+Plugin 'junegunn/goyo.vim'
 
 "Vundle required
 call vundle#end()
@@ -138,7 +143,7 @@ vnoremap H ^
 vnoremap L $
 
 "Mash the enter key to indent the current line and go to the next
-nnoremap <cr> ==j
+"nnoremap <cr> ==j
 
 "Speaking of indents
 nnoremap <c-h> <<
@@ -232,3 +237,11 @@ vnoremap <silent> <leader>c :Commentary<cr>
 "Close temp screens with q
 au FileType help nnoremap q :q!<cr>
 au FileType qf nnoremap q :q!<cr>
+
+" Goyo
+let g:goyo_width=120
+
+" Pandoc options
+" Hard breaks and text width
+let g:pandoc#formatting#mode="h"
+let g:pandoc#formatting#textwidth=120
