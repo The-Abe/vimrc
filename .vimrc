@@ -245,3 +245,7 @@ let g:goyo_width=120
 " Hard breaks and text width
 let g:pandoc#formatting#mode="h"
 let g:pandoc#formatting#textwidth=120
+"
+" Insert language tags with \\
+au FileType eruby inoremap <leader><leader> <%  %><left><left><left>
+au FileType php inoremap <leader><leader> <?php  ?><left><left><left>
