@@ -232,3 +232,7 @@ vnoremap <silent> <leader>c :Commentary<cr>
 "Close temp screens with q
 au FileType help nnoremap q :q!<cr>
 au FileType qf nnoremap q :q!<cr>
+
+" Insert language tags with \\
+au FileType eruby inoremap <leader><leader> <%  %><left><left><left>
+au FileType php inoremap <leader><leader> <?php  ?><left><left><left>
