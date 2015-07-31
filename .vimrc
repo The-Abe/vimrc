@@ -95,9 +95,6 @@ autocmd BufReadPost *
 	\   exe "normal! g`\"" |
 	\ endif
 
-"Font for gvim
-set guifont=DejaVu_Sans_Mono:h12:cANSI
-
 "Statusline including Syntastic end Tagbar tag.
 set statusline=%#error#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -240,6 +237,8 @@ au FileType qf nnoremap q :q!<cr>
 
 " Goyo
 let g:goyo_width=120
+nnoremap <leader>g :Goyo<cr>:set guifont=Latin\ Modern\ Mono\ Light\ 13<cr>
+nnoremap <leader><leader>g :Goyo<cr>:set guifont=DejaVu\ Sans\ Mono\ 11<cr>
 
 " Pandoc options
 " Hard breaks and text width
@@ -249,3 +248,10 @@ let g:pandoc#formatting#textwidth=120
 " Insert language tags with \\
 au FileType eruby inoremap <leader><leader> <%  %><left><left><left>
 au FileType php inoremap <leader><leader> <?php  ?><left><left><left>
+
+"Guifont
+set guifont=DejaVu\ Sans\ Mono\ 11"
+set guioptions-=T  "remove toolbar
+set guioptions-=r  "remove right-hand scroll bar
+set guioptions-=L  "remove left-hand scroll bar
+
