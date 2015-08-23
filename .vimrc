@@ -36,10 +36,6 @@ Plugin 'junegunn/goyo.vim'
 "Vundle required
 call vundle#end()
 
-" Leader
-let mapleader=" "
-nnoremap <SPACE> <Nop>
-
 "Vimwiki wikis
 let g:vimwiki_list = [{'path': '~/Dropbox/Pathfinder/', 'path_html': '~/Dropbox/Pathfinder/html'}]
 
@@ -107,6 +103,11 @@ set statusline+=%#label#\ %<%t\
 set statusline+=[%(%M%R%Y%)]\ 
 set statusline+=%#function#%{tagbar#currenttag('%s','')}\ 
 set statusline+=%=%-1(%#keyword#%l/%L%)
+
+" Syntastic
+" gem install rubocop
+" npm install jshint -g
+let g:syntastic_ruby_checkers=['mri', 'rubocop']
 
 "folding
 set foldmethod=indent
