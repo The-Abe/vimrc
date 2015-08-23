@@ -21,7 +21,6 @@ Plugin 'matchit.zip' "Make % work with more stuff like ruby keywords.
 Plugin 'tpope/vim-surround' "Surround stuff with other stuff.
 Plugin 'vimwiki' "Wiki inside vim that I use for Pathfinder and DND
 Plugin 'tomasr/molokai' "Colorscheme
-Plugin 'spiiph/vim-space' "Make <space> repeat motions like n/N and ;
 Plugin 'tpope/vim-commentary' "Easy comment mappings
 Plugin 'AndrewRadev/splitjoin.vim' "Map gS and gJ to join and split statements.
 Plugin 'mileszs/ack.vim' "Search code with ack, because ack is awesome.
@@ -34,6 +33,10 @@ Plugin 'junegunn/goyo.vim'
 
 "Vundle required
 call vundle#end()
+
+" Leader
+let mapleader=" "
+nnoremap <SPACE> <Nop>
 
 "Vimwiki wikis
 let g:vimwiki_list = [{'path': '~/Dropbox/Pathfinder/', 'path_html': '~/Dropbox/Pathfinder/html'}]
@@ -254,4 +257,3 @@ set guifont=DejaVu\ Sans\ Mono\ 11"
 set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
-
