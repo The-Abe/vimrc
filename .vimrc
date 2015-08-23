@@ -25,6 +25,8 @@ Plugin 'tpope/vim-commentary' "Easy comment mappings
 Plugin 'AndrewRadev/splitjoin.vim' "Map gS and gJ to join and split statements.
 Plugin 'mileszs/ack.vim' "Search code with ack, because ack is awesome.
 Plugin 'rstacruz/sparkup' "Edit html using sparkup syntax
+Plugin 'phleet/vim-mercenary' "Mercurial
+" Fancy schmancy markdown/pandoc mode
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'vim-pandoc/vim-pandoc'
