@@ -1,19 +1,21 @@
+" vim:foldmethod=marker:foldlevel=0
 "Author:  Abe van der Wielen
 "Email:   abevanderwielen@gmail.com
 "Date:    2015-04-06 
 "Website: https://github.com/the-abe
 "File:    .vimrc
 
-"Required
+" Plugins {{{
+" Required
 set nocompatible "Compatibility mode is horrible
 filetype off "Required for Vundle. We'll turn it back on later.
 
-"Vundle required
+" Vundle required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
-"Vundle plugins!
+" Vundle plugins!
 Plugin 'scrooloose/syntastic' "Syntax checking.
 Plugin 'majutsushi/tagbar' "Ctags browser. Also used in statusline.
 Plugin 'kien/ctrlp.vim' "File explorer.
@@ -34,13 +36,14 @@ Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
 Plugin 'junegunn/goyo.vim'
 
-"Vundle required
+" Vundle required
 call vundle#end()
-
+" }}}
+" Vimwiki {{{
 "Vimwiki wikis
 let g:vimwiki_list = [{'path': '~/Dropbox/Pathfinder/', 'path_html': '~/Dropbox/Pathfinder/html'}]
-
-"Basics
+" }}}
+" Basics {{{
 syntax on "Syntax highlighting
 filetype plugin indent on "Filetype detection
 set history=1000 "command history to remember
@@ -76,45 +79,48 @@ colorscheme molokai
 set t_Co=256 "COLOUR ALL THE THINGS!
 set modeline "Enable modelines
 set modelines=5 "Check 5 lines for modelines
-
-"Turn on the wiLd menu
+" }}}
+" Wild menu {{{
+"Turn on the wild menu
 set wildmenu
 set wildmode=longest:full
-
+" }}}
+" Backup settings {{{
 "Turn backup off
 set nobackup
 set nowb
 set noswapfile
-
+" }}}
+" Indent {{{
 "1 tab = 2 spaces
 set expandtab
 set shiftwidth=2
 set tabstop=2
-
-"Return to last edit position when opening files
+" }}}
+"Return to last edit position when opening files {{{
 autocmd BufReadPost *
 	\ if line("'\"") > 0 && line("'\"") <= line("$") |
 	\   exe "normal! g`\"" |
 	\ endif
-
-"Statusline including Syntastic end Tagbar tag.
+" }}}
+" Statusline {{{
 set statusline=%#error#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%#label#\ %<%t\ 
 set statusline+=[%(%M%R%Y%)]\ 
 set statusline+=%#function#%{tagbar#currenttag('%s','')}\ 
 set statusline+=%=%-1(%#keyword#%l/%L%)
-
-" Syntastic
+" }}}
+" Syntastic {{{
 " gem install rubocop
 " npm install jshint -g
 let g:syntastic_ruby_checkers=['mri', 'rubocop']
-
-"folding
+" }}}
+" Folding {{{
 set foldmethod=indent
 set foldlevelstart=99
-
-"Surround ruby
+" }}}
+" Surround {{{
 "45 = -
 "95 = _ (<S-->)
 let g:surround_45 = "<%- \r -%>"
@@ -123,33 +129,31 @@ nmap <leader>- yss-
 nmap <leader>= yss_
 imap <leader>- <c-o>yss-<esc>$bbea
 imap <leader>= <c-o>yss_<esc>$bbea
-
-"Call tidyhtml or tinyxml
+" }}}
+" Tidyhtml {{{
 command! Tidyhtml :%!tidy -q -i --show-errors 0
 function! Tidyxml()
   :%!tidy -q -i --show-errors 0 -xml
   :set ft=xml
 endfunction
 command! Tidyxml :call Tidyxml()
-
-"Force c-c for esc. Remapped so c-c completes abbreviations and stuff.
-"(I have CapsLock mapped to the control key.)
+" }}}
+" Mappings {{{
+" Force c-c for esc. Remapped so c-c completes abbreviations and stuff.
+" (I have CapsLock mapped to the control key.)
 inoremap <c-c> <esc>
 
-"Center on search results
+" Center on search results
 nnoremap N Nzz
 nnoremap n nzz
 
-"H/L for really fast end and home.
+" H/L for really fast end and home.
 nnoremap H ^
 nnoremap L $
 vnoremap H ^
 vnoremap L $
 
-"Mash the enter key to indent the current line and go to the next
-"nnoremap <cr> ==j
-
-"Speaking of indents
+" Speaking of indents
 nnoremap <c-h> <<
 nnoremap <c-l> >>
 inoremap <c-h> <c-o><<
@@ -157,51 +161,24 @@ inoremap <c-l> <c-o>>>
 vnoremap <c-h> < gv
 vnoremap <c-l> > gv
 
-"Move lines
+" Move lines
 nnoremap <c-k> :move-2<cr>
 nnoremap <c-j> :move+<cr>
 vnoremap <c-k> :move-2<cr>gv
 vnoremap <c-j> :move'>+<cr>gv
 
-"Turn 2+2 into 2+2=4
+" Turn 2+2 into 2+2=4
 nnoremap <leader>bc :.!bc -l<cr>
 
-"Shortcut .vimrc
+" Shortcut .vimrc
 nnoremap <leader>ve :e ~/.vimrc<cr>
 nnoremap <leader>vs :source ~/.vimrc<cr>
-
-"Spelling
-set spelllang=nl,en
-nnoremap <f9> :set spell!<cr>
-
-"Blowfish for Encryption when saving a file with :X
-set cm=blowfish
-
-"Highlight folds with nothing, to prevent headaches.
-highlight Folded ctermfg=none ctermbg=none
-highlight FoldColumn ctermfg=none ctermbg=none
-
-"CtrlP
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_follow_symlinks = 1
-let g:ctrlp_max_height = 20
-"<c-b> for buffers
-nnoremap <silent> <c-b> :CtrlPBuffer<cr>
-
-"Author email date etc abbreviations
-iabbrev name/ Abe van der Wielen
-iabbrev email/ abevanderwielen@gmail.com
-iabbrev date/ <c-r>=strftime("%F")<CR> 
-iabbrev file/ <c-r>%
-iabbrev github/ https://github.com/the-abe
 
 " Sort lines
 nnoremap <leader>s vip:!sort<cr>
 vnoremap <leader>s :!sort<cr>
 
-"Toggle common options
+" Toggle common options
 nnoremap <leader>p :set paste!<cr>
 nnoremap <leader>w :set wrap!<cr>
 nnoremap <leader>h :set hlsearch!<cr>
@@ -209,19 +186,16 @@ nnoremap <leader>h :set hlsearch!<cr>
 " Sudo to write
 cnoremap w!! w !sudo tee % >/dev/null
 
-"Completion mappings because I'm too lazy to type <c-x>
+" Completion mappings because I'm too lazy to type <c-x>
 inoremap <c-f> <c-x><c-f>
 inoremap <c-]> <c-x><c-]>
 inoremap <c-n> <c-x><c-n>
 
-"Home and end just like bash
+" Home and end just like bash
 inoremap <c-a> <c-o>I
 inoremap <c-e> <c-o>A
 cnoremap <c-a> <home>
 cnoremap <c-e> <end>
-
-"Check ruby with ruby -wc
-autocmd Filetype ruby nnoremap <silent> <f5> :SyntasticCheck<cr>:Errors<cr>
 
 " Markdown headings
 nnoremap <leader>1 mPyypVr=`P
@@ -230,30 +204,57 @@ nnoremap <leader>3 mPI### <esc>`P3l
 nnoremap <leader>4 mPI#### <esc>`P5l
 nnoremap <leader>5 mPI##### <esc>`Pi6l
 
-"commentary mapping
+" Commentary mapping
 nnoremap <silent> <leader>c :Commentary<cr>
 vnoremap <silent> <leader>c :Commentary<cr>
 
-"Close temp screens with q
+" Close temp screens with q
 au FileType help nnoremap q :q!<cr>
 au FileType qf nnoremap q :q!<cr>
-
-" Goyo
+" }}}
+" Spelling {{{
+set spelllang=nl,en
+nnoremap <f9> :set spell!<cr>
+" }}}
+" Encryption {{{
+" Blowfish for Encryption when saving a file with :X
+set cm=blowfish
+" }}}
+" Custom highlighting {{{
+" Highlight folds with nothing, to prevent headaches.
+highlight Folded ctermfg=none ctermbg=none
+highlight FoldColumn ctermfg=none ctermbg=none
+" }}}
+" CtrlP {{{
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_follow_symlinks = 1
+let g:ctrlp_max_height = 20
+"<c-b> for buffers
+nnoremap <silent> <c-b> :CtrlPBuffer<cr>
+" }}}
+" Abreviations {{{
+"Author email date etc abbreviations
+iabbrev name/ Abe van der Wielen
+iabbrev email/ abevanderwielen@gmail.com
+iabbrev date/ <c-r>=strftime("%F")<CR> 
+iabbrev file/ <c-r>%
+iabbrev github/ https://github.com/the-abe
+" }}}
+" Goyo {{{
 let g:goyo_width=120
 nnoremap <leader>g :Goyo<cr>:set guifont=Latin\ Modern\ Mono\ Light\ 13<cr>
 nnoremap <leader><leader>g :Goyo<cr>:set guifont=DejaVu\ Sans\ Mono\ 11<cr>
-
-" Pandoc options
+" }}}
+" Pandoc {{{
 " Hard breaks and text width
 let g:pandoc#formatting#mode="h"
 let g:pandoc#formatting#textwidth=120
-"
-" Insert language tags with \\
-au FileType eruby inoremap <leader><leader> <%  %><left><left><left>
-au FileType php inoremap <leader><leader> <?php  ?><left><left><left>
-
-"Guifont
+" }}}
+" Guifont {{{
 set guifont=DejaVu\ Sans\ Mono\ 11"
 set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
+" }}}
