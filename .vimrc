@@ -26,6 +26,7 @@ Plugin 'AndrewRadev/splitjoin.vim' "Map gS and gJ to join and split statements.
 Plugin 'mileszs/ack.vim' "Search code with ack, because ack is awesome.
 Plugin 'rstacruz/sparkup' "Edit html using sparkup syntax
 Plugin 'phleet/vim-mercenary' "Mercurial
+Plugin 'ervandew/supertab' "Tabcomplete
 " Fancy schmancy markdown/pandoc mode
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
@@ -218,10 +219,6 @@ inoremap <c-a> <c-o>I
 inoremap <c-e> <c-o>A
 cnoremap <c-a> <home>
 cnoremap <c-e> <end>
-
-"Different background colour past 121 characters
-let &colorcolumn=join(range(121,999),",")
-highlight ColorColumn ctermbg=235 guibg=#2c2d27
 
 "Check ruby with ruby -wc
 autocmd Filetype ruby nnoremap <silent> <f5> :SyntasticCheck<cr>:Errors<cr>
