@@ -29,6 +29,7 @@ Plugin 'mileszs/ack.vim' "Search code with ack, because ack is awesome.
 Plugin 'rstacruz/sparkup' "Edit html using sparkup syntax
 Plugin 'phleet/vim-mercenary' "Mercurial
 Plugin 'ervandew/supertab' "Tabcomplete
+Plugin 'terryma/vim-expand-region' "Expand regions with + and -
 " Fancy schmancy markdown/pandoc mode
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
