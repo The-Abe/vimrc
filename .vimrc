@@ -30,6 +30,9 @@ Plugin 'rstacruz/sparkup' "Edit html using sparkup syntax
 Plugin 'phleet/vim-mercenary' "Mercurial
 Plugin 'ervandew/supertab' "Tabcomplete
 Plugin 'terryma/vim-expand-region' "Expand regions with + and -
+Plugin 'prophittcorey/vim-flay' "Flay for fancy ruby checking
+Plugin 'vimoutliner/vimoutliner' "Create outlines in vim in .otl files.
+
 " Fancy schmancy markdown/pandoc mode
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
@@ -115,7 +118,13 @@ set statusline+=%=%-1(%#keyword#%l/%L%)
 " Syntastic {{{
 " gem install rubocop
 " npm install jshint -g
-let g:syntastic_ruby_checkers=['mri', 'rubocop']
+let g:syntastic_ruby_checkers=['mri']
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_eruby_ruby_quiet_messages =
+      \ {'regex': 'in void context'}
 " }}}
 " Folding {{{
 set foldmethod=indent
@@ -138,6 +147,8 @@ function! Tidyxml()
   :set ft=xml
 endfunction
 command! Tidyxml :call Tidyxml()
+" }}}
+command! Tidyjs :%!js-beautify
 " }}}
 " Mappings {{{
 " Force c-c for esc. Remapped so c-c completes abbreviations and stuff.
@@ -212,6 +223,9 @@ vnoremap <silent> <leader>c :Commentary<cr>
 " Close temp screens with q
 au FileType help nnoremap q :q!<cr>
 au FileType qf nnoremap q :q!<cr>
+
+" Toggle folds
+nnoremap <tab> za
 " }}}
 " Spelling {{{
 set spelllang=nl,en
