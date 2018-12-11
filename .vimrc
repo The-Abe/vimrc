@@ -1,7 +1,7 @@
 " vim:foldmethod=marker:foldlevel=0
 "Author:  Abe van der Wielen
 "Email:   abevanderwielen@gmail.com
-"Date:    2015-04-06 
+"Date:    2015-04-06
 "Website: https://github.com/the-abe
 "File:    .vimrc
 
@@ -17,40 +17,45 @@ Plugin 'gmarik/Vundle.vim'
 
 " Vundle plugins!
 Plugin 'scrooloose/syntastic' "Syntax checking.
-Plugin 'majutsushi/tagbar' "Ctags browser. Also used in statusline.
 Plugin 'kien/ctrlp.vim' "File explorer.
 Plugin 'matchit.zip' "Make % work with more stuff like ruby keywords.
 Plugin 'tpope/vim-surround' "Surround stuff with other stuff.
-Plugin 'vimwiki' "Wiki inside vim that I use for Pathfinder and DND
 Plugin 'tomasr/molokai' "Colorscheme
 Plugin 'tpope/vim-commentary' "Easy comment mappings
 Plugin 'AndrewRadev/splitjoin.vim' "Map gS and gJ to join and split statements.
-Plugin 'mileszs/ack.vim' "Search code with ack, because ack is awesome.
 Plugin 'rstacruz/sparkup' "Edit html using sparkup syntax
 Plugin 'phleet/vim-mercenary' "Mercurial
 Plugin 'ervandew/supertab' "Tabcomplete
 Plugin 'terryma/vim-expand-region' "Expand regions with + and -
-Plugin 'prophittcorey/vim-flay' "Flay for fancy ruby checking
 Plugin 'vimoutliner/vimoutliner' "Create outlines in vim in .otl files.
+Plugin 'itchyny/lightline.vim' "Statusbar
+Plugin 'scrooloose/nerdtree' "Nerdtree
+Plugin 'mhinz/vim-signify' "CVS gitter
+Plugin 'tpope/vim-endwise' "Automatic closing of opening anything.
+Plugin 'tacahiroy/ctrlp-funky' "Ctrlp for functions.
+Plugin 'easymotion/vim-easymotion' "Easymotion, der..
+Plugin 'vim-airline/vim-airline' "Airline statusbar
+Plugin 'vim-airline/vim-airline-themes' "Airline themes
+Plugin 'osyo-manga/vim-over' "Preview replacements
+
 
 " Fancy schmancy markdown/pandoc mode
-Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
-Plugin 'junegunn/goyo.vim'
 
 " Vundle required
 call vundle#end()
 " }}}
-" Vimwiki {{{
-"Vimwiki wikis
-let g:vimwiki_list = [{'path': '~/Dropbox/Pathfinder/', 'path_html': '~/Dropbox/Pathfinder/html'}]
-" }}}
+if exists('+termguicolors')
+  set termguicolors
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
 " Basics {{{
 syntax on "Syntax highlighting
 filetype plugin indent on "Filetype detection
-set history=1000 "command history to remember
+set history=10000 "command history to remember
 set autoread "Autoread the file when outside changes occur
 set scrolloff=2 "extra lines to show when scrolling
 set ruler "Always show current position
@@ -79,8 +84,9 @@ set linebreak "Only wrap on sensible breaking points
 set shiftround "When shifting indents with <,>, round to nearest valid indent.
 set textwidth=80 "80 characters for wrapping
 set formatoptions=qrn1j "Better format options see :h fo-table
+set background=dark
 colorscheme molokai
-set t_Co=256 "COLOUR ALL THE THINGS!
+"set t_Co=256 "COLOUR ALL THE THINGS!
 set modeline "Enable modelines
 set modelines=5 "Check 5 lines for modelines
 " }}}
@@ -106,14 +112,6 @@ autocmd BufReadPost *
 	\ if line("'\"") > 0 && line("'\"") <= line("$") |
 	\   exe "normal! g`\"" |
 	\ endif
-" }}}
-" Statusline {{{
-set statusline=%#error#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%#label#\ %<%t\ 
-set statusline+=[%(%M%R%Y%)]\ 
-set statusline+=%#function#%{tagbar#currenttag('%s','')}\ 
-set statusline+=%=%-1(%#keyword#%l/%L%)
 " }}}
 " Syntastic {{{
 " gem install rubocop
@@ -147,7 +145,6 @@ function! Tidyxml()
   :set ft=xml
 endfunction
 command! Tidyxml :call Tidyxml()
-" }}}
 command! Tidyjs :%!js-beautify
 " }}}
 " Mappings {{{
@@ -237,30 +234,27 @@ set cm=blowfish
 " }}}
 " Custom highlighting {{{
 " Highlight folds with nothing, to prevent headaches.
-highlight Folded ctermfg=none ctermbg=none
-highlight FoldColumn ctermfg=none ctermbg=none
+highlight Folded ctermfg=none ctermbg=none guifg=NONE guibg=NONE
+highlight FoldColumn ctermfg=none ctermbg=none guifg=NONE guibg=NONE
 " }}}
 " CtrlP {{{
-let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_map = '<c-p>'
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_follow_symlinks = 1
 let g:ctrlp_max_height = 20
 "<c-b> for buffers
 nnoremap <silent> <c-b> :CtrlPBuffer<cr>
+nnoremap <silent> <c-f> :CtrlPFunky<Cr>
+"nnoremap <silent> <c-p> :FZF<cr>
 " }}}
 " Abreviations {{{
 "Author email date etc abbreviations
 iabbrev name/ Abe van der Wielen
 iabbrev email/ abevanderwielen@gmail.com
-iabbrev date/ <c-r>=strftime("%F")<CR> 
+iabbrev date/ <c-r>=strftime("%F")<CR>
 iabbrev file/ <c-r>%
 iabbrev github/ https://github.com/the-abe
-" }}}
-" Goyo {{{
-let g:goyo_width=120
-nnoremap <leader>g :Goyo<cr>:set guifont=Latin\ Modern\ Mono\ Light\ 13<cr>
-nnoremap <leader><leader>g :Goyo<cr>:set guifont=DejaVu\ Sans\ Mono\ 11<cr>
 " }}}
 " Pandoc {{{
 " Hard breaks and text width
@@ -273,3 +267,11 @@ set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 " }}}
+" {{{ Airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+" }}}
+" {{{ Vimover
+nnoremap <leader>s :OverCommandLine<CR>
+" }}}
+
