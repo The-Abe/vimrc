@@ -37,6 +37,10 @@ Plugin 'easymotion/vim-easymotion' "Easymotion, der..
 Plugin 'vim-airline/vim-airline' "Airline statusbar
 Plugin 'vim-airline/vim-airline-themes' "Airline themes
 Plugin 'osyo-manga/vim-over' "Preview replacements
+Plugin 'edkolev/tmuxline.vim' "generate matching tmux statusline
+Plugin 'soramugi/auto-ctags.vim' "Autocreate ctags
+Plugin 'majutsushi/tagbar' "Ctags tagbar with airline supporty stuff
+Plugin 'tpope/vim-eunuch' " :Rename :Chmod etc...
 
 
 " Fancy schmancy markdown/pandoc mode
@@ -47,11 +51,13 @@ Plugin 'vim-pandoc/vim-pandoc-syntax'
 " Vundle required
 call vundle#end()
 " }}}
+" Purdy colours {{{
 if exists('+termguicolors')
   set termguicolors
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
+" }}}
 " Basics {{{
 syntax on "Syntax highlighting
 filetype plugin indent on "Filetype detection
@@ -109,9 +115,9 @@ set tabstop=2
 " }}}
 "Return to last edit position when opening files {{{
 autocmd BufReadPost *
-	\ if line("'\"") > 0 && line("'\"") <= line("$") |
-	\   exe "normal! g`\"" |
-	\ endif
+  \ if line("'\"") > 0 && line("'\"") <= line("$") |
+  \   exe "normal! g`\"" |
+  \ endif
 " }}}
 " Syntastic {{{
 " gem install rubocop
@@ -192,13 +198,11 @@ nnoremap <leader>p :set paste!<cr>
 nnoremap <leader>w :set wrap!<cr>
 nnoremap <leader>h :set hlsearch!<cr>
 
-" Sudo to write
-cnoremap w!! w !sudo tee % >/dev/null
-
 " Completion mappings because I'm too lazy to type <c-x>
 inoremap <c-f> <c-x><c-f>
 inoremap <c-]> <c-x><c-]>
 inoremap <c-n> <c-x><c-n>
+inoremap <c-o> <c-x><c-o>
 
 " Home and end just like bash
 inoremap <c-a> <c-o>I
@@ -274,4 +278,8 @@ let g:airline_powerline_fonts = 1
 " {{{ Vimover
 nnoremap <leader>s :OverCommandLine<CR>
 " }}}
-
+" {{{ Easymotion
+" <C-@> is Ctrl-space because reasons
+nmap <C-@> <Plug>(easymotion-b)
+nmap <Space> <Plug>(easymotion-w)
+" }}}
